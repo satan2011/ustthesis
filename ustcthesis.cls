@@ -1,4 +1,4 @@
-%
+%lyx模板使用该文件时，需要禁用\RequirePackage{subcaption}
 % Copyright (C) 2015-2023 by USTC TeX Users Group <https://github.com/ustctug>
 %
 % This file may be distributed and/or modified under the
@@ -1633,9 +1633,10 @@
   \pagenumbering{Roman}%
   \ifustc@degree@graduate
     \pagestyle{plain}%
+    \fancyfoot[C]{\ustc@hf@font\thepage}  %修改研究生title页码格式，包含摘要和目录
   \else
     \pagenumbering{Roman}
-    \pagestyle{headings}%            本科生中英文摘要不带页码
+    \pagestyle{headings}                  %本科生中英文摘要不带页码
   \fi
 }
 
@@ -1728,7 +1729,13 @@
     name = student@id,
   },
   secret-level = {
-    default = {公开},  
+    choices = {
+      公开,
+      绝密,
+      机密,
+      秘密,
+    },
+    default = {},  
     name    = secret@level,
   },
   secret-level* = {
@@ -1928,7 +1935,7 @@
     \includegraphics[width=10cm]{figures/ustc-title-page-heading.pdf}\par
     \vskip -1cm%
     {\sffamily\fontsize{24bp}{40bp}\selectfont\songti
-      硕\hspace{0.5em} 士\hspace{0.5em} 学\hspace{0.5em} 位\hspace{0.5em} 论\hspace{0.5em} 文 \par}%%\ustc@thesis@name\par}%
+      \renewcommand\CJKglue{\hspace{16bp}}硕士学位论文\par}%\ustc@thesis@name\par}%
     % \ifustc@degree@type@academic
     %   \vskip 2.0cm%
     % \else
@@ -1965,13 +1972,13 @@
     {\linespread{1.5}\centering\fontsize{16bp}{26.67bp}\selectfont\kaishu
       \begin{tabular}{@{}l@{\hspace{\ccwd}}c@{}}%      
       %\begin{tabular}{@{}l@{\hspace{\ccwd}}c@{}}%
-        \textsf{论\hspace{0.75em} 文\hspace{0.75em} 作\hspace{0.75em} 者：} & \hspace{8em}\ustc@author\hspace{8em}                                    \\
+        \renewcommand\CJKglue{\hspace{16bp}}\textsf{论文作者：} & \hspace{8em}\ustc@author\hspace{8em}                                    \\
           \cline{2-2}        
         \textsf{指导教师、职称：} & \ustc@supervisor@names \\
           \cline{2-2}        
         \textsf{学科、专业名称：} & \ustc@speciality \\
           \cline{2-2}        
-        \textsf{研\hspace{0.7em} 究\hspace{0.7em} 方\hspace{0.7em} 向：} & \ustc@research \\
+        \renewcommand\CJKglue{\hspace{16bp}}\textsf{研究方向：} & \ustc@research \\
           \cline{2-2}
       \end{tabular}\par}\par%
     \vskip 60bp%   
@@ -1981,15 +1988,15 @@
     {\linespread{1.46}\centering\fontsize{16bp}{26.67bp}\selectfont\kaishu
       \begin{tabular}{@{}l@{\hspace{\ccwd}}c@{}}%      
       %\begin{tabular}{@{}l@{\hspace{\ccwd}}c@{}}%
-        \textsf{论\hspace{0.74em} 文\hspace{0.74em} 作\hspace{0.74em} 者：} & \hspace{8em}\ustc@author\hspace{8em}                                    \\
+        \renewcommand\CJKglue{\hspace{16bp}}\textsf{论文作者：} & \hspace{8em}\ustc@author\hspace{8em}                                    \\
           \cline{2-2}        
         \textsf{指导教师、职称：} & \ustc@supervisor@names \\
           \cline{2-2}        
-        \textsf{校\thinspace \kern 1pt外\thinspace 指\thinspace 导\thinspace 教\thinspace 师：} & \ustc@advisor@names \\
+        \renewcommand\CJKglue{\hspace{3bp}}\textsf{校外指导教师：} & \ustc@advisor@names \\
           \cline{2-2}       
-        \textsf{专\thinspace \kern 1pt业\thinspace 学\thinspace 位\thinspace 类\thinspace 别：} & \ustc@speciality \\
+        \renewcommand\CJKglue{\hspace{3bp}}\textsf{专业学位类别：} & \ustc@speciality \\
           \cline{2-2}        
-        \textsf{专\thinspace \kern 1pt业\thinspace 领\thinspace 域\thinspace 名\thinspace 称：} & \ustc@research \\
+        \renewcommand\CJKglue{\hspace{3bp}}\textsf{专业领域名称：} & \ustc@research \\
           \cline{2-2}
       \end{tabular}\par}\par%
     \vskip 30bp%   
@@ -2198,7 +2205,7 @@
   \pagestyle{empty}%
   \ifustc@degree@graduate
     \ustc@title@page@graduate@zh
-    \ustc@title@page@graduate@en
+    %\ustc@title@page@graduate@en                    %英文封面
   \else
     \ustc@title@page@bachelor
   \fi
@@ -2274,13 +2281,13 @@
     %\vskip 1.3cm%
     \linespread{1.5}\fontsize{12pt}{20pt}\selectfont
       本学位论文属于\par  
-    \ifx\ustc@secret@level\@empty
-      %\ustc@checkbox{} 
+    \ifustc@secret@level@公开
+      %\ustc@checkbox{} %\enspace 0.5em，\thinspace产生1/6em的空白
        1、保密$\square$，在\ustc@underline[3em]{}年解密后适用本授权书。\par
-       2、不保密\ustc@checkbox{}（请在以上相应方框内打“√”）\par
+       2、不保密\ustc@checkbox{}。（请在以上相应方框内打“√”）\par
     \else
        1、保密\ustc@checkbox{}，在\ustc@underline[3em]{\ustc@secret@year}年解密后适用本授权书。\par
-       2、不保密$\square$（请在以上相应方框内打“√”）\par
+       2、不保密$\square$。（请在以上相应方框内打“√”）\par
     \fi
     \linespread{1.5}\fontsize{12pt}{20pt}\selectfont
     {\sffamily\bfseries\fontsize{12pt}{20pt}\selectfont
@@ -2647,8 +2654,8 @@
 \renewcommand\tableofcontents{%
   \ifustc@degree@bachelor
     \cleardoublepage
-    \pagenumbering{Roman}%
-    \fancyfoot[C]{\thepage}%
+    \pagenumbering{Roman}           %本科生目录页码设置
+    \fancyfoot[C]{\thepage}         %页码样式
     \ustc@tocloadedtrue
   \fi
   \ustc@chapter{\contentsname}%
