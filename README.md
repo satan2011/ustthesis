@@ -27,7 +27,7 @@
 
 - 校内镜像：
 
-- TexPage 模板 <https://www.texpage.com/share/88a775b210db4cf4b21cc2b826915bba>
+- TexPage 模板 <https://www.texpage.com/share/88a775b210db4cf4b21cc2b826915bba>只提供下载
 
 - Overleaf 模板 <https://www.overleaf.com/read/shndbpwzgqdg>
 
