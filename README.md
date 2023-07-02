@@ -23,11 +23,13 @@
 
 - GitHub Releases：<https://github.com/ustctug/ustcthesis/releases>
 
+- Gitee Releases：<https://gitee.com/satan2010/ustthesis>
+
 - 校内镜像：
 
 - TexPage 模板 <https://www.texpage.com/share/88a775b210db4cf4b21cc2b826915bba>
 
-- Overleaf 模板 <>
+- Overleaf 模板 <https://www.overleaf.com/read/shndbpwzgqdg>
 
 - 研究生院网站：<>
 
